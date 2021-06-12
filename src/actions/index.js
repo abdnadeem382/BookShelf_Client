@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+
+//BOOK ACTIONS
 export function getBooks(limit=10, start=0, order='asc',list=''){
 
     const request  = axios.get(`http://localhost:3001/api/getbooks?skip=${start}&limit=${limit}&order=${order}`)
@@ -52,5 +54,20 @@ export function clearBookWithReviewer(){
             book: {},
             reviewer: {}
         }
+    }
+}
+
+
+
+//USER ACTIONS
+export function loginUser({email,password}){
+    
+    const request = axios.post(`http://localhost:3001/api/login`,{email,password})
+                    .then((response)=>{
+                        return response.data
+                    })
+    return {
+        type: 'USER_LOGIN',
+        payload: request
     }
 }
